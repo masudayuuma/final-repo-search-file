@@ -27,6 +27,22 @@ const MyAccount: React.FC = () => {
     }
   }, [userData]);
 
+  // empty viewの追加
+  if (!userData) {
+    return (
+      <>
+        <Header />
+        <main className={styles.main}>
+          <div>
+            <h1>マイアカウント詳細</h1>
+            <p>GitHubユーザー名を正しく入力してください</p>
+          </div>
+        </main>
+        <Footer />
+      </>
+    );
+  }
+
   return (
     <>
       <Header />

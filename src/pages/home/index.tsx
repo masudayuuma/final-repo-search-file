@@ -26,7 +26,7 @@ export default function Home() {
         </p>
 
         <div className={styles.grid}>
-          <Link href={`/myacount/${username}`} className={styles.card}>
+          <Link href={`/myAccount/${username}`} className={styles.card}>
               <h3>Acount &rarr;</h3>
               <p>あなたのアカウントページへ</p>
           </Link>

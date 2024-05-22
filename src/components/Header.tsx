@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
           <p>&larr; 戻る</p>
         </Link>
         {userData && userData.avatar_url && (
-          <Link href={`/myacount/${username}`}>
+          <Link href={`/myAccount/${username}`}>
             <img src={userData.avatar_url} alt="アイコン" className={styles.headerIcon} />
           </Link>
         )}
