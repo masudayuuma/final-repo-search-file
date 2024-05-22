@@ -23,7 +23,7 @@ const MyAccount: React.FC = () => {
       axios
         .get(userData.repos_url)
         .then((res) => setUserRepos(res.data))
-        .catch((error) => console.error(error));
+        .catch((error) => console.error("リポジトリデータが取得できませんでした", error));
     }
   }, [userData]);
 

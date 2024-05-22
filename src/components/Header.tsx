@@ -13,7 +13,7 @@ export const Header: React.FC = () => {
     if (username) {
       axios.get(`https://api.github.com/users/${username}`)
         .then((res) => { setUserData(res.data) })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error("ユーザーデータが取得できませんでした",error));
     }
   }, [username]);
 
