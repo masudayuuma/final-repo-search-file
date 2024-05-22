@@ -2,12 +2,8 @@ import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { search } from "@/utils/utils";
 import React, { useState, ChangeEvent } from "react";
-// import { search } from "../../utils";
-// import Results from "../../components/Results";
 import styles from '@/styles/styles.module.css';
 import Results from "@/components/repoans";
-// import { Header } from "../../components/Header";
-// import { Footer } from "../../components/Footer";
 
 const RepositoriesSearch: React.FC = () => {
   const [repositories, setRepositories] = useState<any[] | null>(null);
