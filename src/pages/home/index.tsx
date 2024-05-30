@@ -2,9 +2,8 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import styles from '@/styles/styles.module.css';
-// import { Footer } from '@/components/Footer';
 import { useRecoilValue } from 'recoil';
-import { usernameState } from '@/utils/atom'; // パスを確認してください
+import { usernameState } from '@/utils/atom'; 
 import { Footer } from '@/components/Footer';
 
 export default function Home() {
