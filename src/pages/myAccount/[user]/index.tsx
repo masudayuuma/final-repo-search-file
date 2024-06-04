@@ -58,15 +58,19 @@ const MyAccount: React.FC = () => {
               {userRepos && (
                 <div>
                   <h2>レポジトリ一覧</h2>
-                  <ul>
-                    {userRepos.map((repo) => (
-                      <li key={repo.id}>
-                        <Link href={repo.html_url}>{repo.full_name}</Link>
-                      </li>
-                    ))}
-                  </ul>
+                  {userRepos.length === 0 ? (
+                    <p>リポジトリデータはありません</p>
+                  ) : (
+                    <ul>
+                      {userRepos.map((repo) => (
+                        <li key={repo.id}>
+                          <Link href={repo.html_url}>{repo.full_name}</Link>
+                        </li>
+                      ))}
+                    </ul>
+                   )}
                 </div>
-              )}
+                )}
               <p>マイアカウントページ {userData.url}</p>
             </>
           )}
