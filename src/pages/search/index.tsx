@@ -8,7 +8,7 @@ import Results from "@/components/repoans";
 const RepositoriesSearch: React.FC = () => {
   const [repositories, setRepositories] = useState<any[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>("");
   const [page, setPage] = useState<number>(1); // ページ番号を管理する状態
 
   const performSearch = async (val: string, page: number = 1) => {
@@ -23,12 +23,12 @@ const RepositoriesSearch: React.FC = () => {
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
     setPage(1); // 検索クエリが変更されたらページをリセット
     performSearch(e.target.value, 1);
-    setValue(e.target.value);
+    setSearchValue(e.target.value);
   };
 
   const onPageChange = async (newPage: number) => {
     setPage(newPage);
-    performSearch(value, newPage);
+    performSearch(searchValue, newPage);
   };
 
   const renderRepositories = () => {
@@ -59,7 +59,7 @@ const RepositoriesSearch: React.FC = () => {
       <Header />
       <main className={styles.main}>
         <input
-          value={value}
+          value={searchValue}
           onChange={e => onChangeHandler(e)}
           placeholder="調べ物はなんですか"
           className={styles.input}
