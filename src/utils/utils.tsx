@@ -29,9 +29,9 @@ const makeRequestCreator = () => {
       return result;
     } catch (error) {
       if (axios.isCancel(error)) {
-        console.error("Request canceled", error.message);
+        console.error("リクエストがキャンセルされました", error.message);
       } else {
-        console.error("Something went wrong: ");
+        console.error("エラーが発生しました ");
       }
     }
   };
