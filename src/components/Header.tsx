@@ -3,10 +3,10 @@ import styles from '@/styles/styles.module.css';
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import axios from "axios";
-import { usernameState, userState } from "@/utils/atom";
+import { usernameState, userDataState } from "@/utils/atom";
 
 export const Header: React.FC = () => {
-  const [userData, setUserData] = useRecoilState(userState);
+  const [userData, setUserData] = useRecoilState(userDataState);
   const username = useRecoilValue(usernameState);
 
   useEffect(() => {

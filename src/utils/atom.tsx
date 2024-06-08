@@ -16,7 +16,7 @@ export const emailState = atom<string>({
 // headerでdateを保持するためのアトム。将来的に変更の余地あり。
 // [user].jsでも保持したデータが使われる
 // any以外にすると、型が合わないエラーが出る
-export const userState = atom<any | null>({
+export const userDataState = atom<any | null>({
     key: 'userState',
     default: null,
     // effects_UNSTABLE: [

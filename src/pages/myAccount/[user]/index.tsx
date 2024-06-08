@@ -3,7 +3,7 @@ import { useRecoilState } from "recoil";
 import Link from "next/link";
 import styles from "@/styles/styles.module.css";
 import axios from "axios";
-import { userState } from "@/utils/atom";
+import { userDataState } from "@/utils/atom";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
@@ -15,7 +15,7 @@ interface Repo {
 
 const MyAccount: React.FC = () => {
   // setUserDataを削除するとエラーが発生します
-  const [userData, setUserData] = useRecoilState(userState);
+  const [userData, setUserData] = useRecoilState(userDataState);
   const [userRepos, setUserRepos] = useState<Repo[]>([]);
 
   useEffect(() => {
