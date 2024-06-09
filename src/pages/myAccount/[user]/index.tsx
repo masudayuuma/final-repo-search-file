@@ -14,7 +14,6 @@ interface Repo {
 }
 
 const MyAccount: React.FC = () => {
-  // setUserDataを削除するとエラーが発生します
   const [userData, setUserData] = useRecoilState(userDataState);
   const [userRepos, setUserRepos] = useState<Repo[]>([]);
 
