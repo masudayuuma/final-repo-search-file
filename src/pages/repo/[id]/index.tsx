@@ -6,7 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 interface Repository {
-  name: string;
+  full_name: string;
   html_url: string;
   language: string;
   stargazers_count: number;
@@ -50,7 +50,7 @@ const RepositoryPage: React.FC = () => {
       <h1>Repository詳細</h1>
       {repository ? (
         <div>
-          <p>リポジトリ名: {repository.name}</p>
+          <p>リポジトリ名: {repository.full_name}</p>
           <p>オーナーアイコン: </p>
           <Link href={repository.html_url}>
           <img src={repository.owner.avatar_url} alt="ユーザーアイコン" />
