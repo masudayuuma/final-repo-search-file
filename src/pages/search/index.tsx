@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { search } from "@/utils/utils";
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent} from "react";
 import styles from '@/styles/styles.module.css';
 import Results from "@/components/repoans";
 
@@ -10,6 +10,7 @@ const RepositoriesSearch: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchValue, setSearchValue] = useState<string>("");
   const [page, setPage] = useState<number>(1); // ページ番号を管理する状態
+  const [hasMoreRepo, setHasMoreRepo] = useState<boolean>(true); // 次のページに結果があるかどうかを管理する状態
 
   const performSearch = async (val: string, page: number = 1) => {
     setLoading(true);
@@ -18,10 +19,11 @@ const RepositoriesSearch: React.FC = () => {
     );
     setRepositories(items);
     setLoading(false);
+    setHasMoreRepo(items && items.length === 20); 
   };
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-    setPage(1); // 検索クエリが変更されたらページをリセット
+    setPage(1); 
     performSearch(e.target.value, 1);
     setSearchValue(e.target.value);
   };
@@ -46,7 +48,7 @@ const RepositoriesSearch: React.FC = () => {
             前のページ
           </button>
           <span>ページ {page}</span>
-          <button onClick={() => onPageChange(page + 1)}>
+          <button onClick={() => onPageChange(page + 1)} disabled={!hasMoreRepo}>
             次のページ
           </button>
         </div>
