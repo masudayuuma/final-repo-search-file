@@ -1,7 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { search } from "@/utils/utils";
-import React, { useState, ChangeEvent} from "react";
+import React, { useState, ChangeEvent } from "react";
 import styles from '@/styles/styles.module.css';
 import Results from "@/components/repoans";
 
@@ -19,7 +19,7 @@ const RepositoriesSearch: React.FC = () => {
     );
     setRepositories(items);
     setLoading(false);
-    setHasMoreRepo(items && items.length === 20); 
+    setHasMoreRepo(items && items.length === 20 ); 
   };
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ const RepositoriesSearch: React.FC = () => {
             前のページ
           </button>
           <span>ページ {page}</span>
-          <button onClick={() => onPageChange(page + 1)} disabled={!hasMoreRepo}>
+          <button onClick={() => onPageChange(page + 1)} disabled={!hasMoreRepo || page === 5}>
             次のページ
           </button>
         </div>
