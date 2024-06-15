@@ -240,3 +240,14 @@
   color: red;
   margin-top: 10px;
 }
+
+.backButton {
+  background: none;
+  border: none;
+  color: #0070f3;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 20px;
+  padding: 0;
+  text-decoration: underline;
+}
