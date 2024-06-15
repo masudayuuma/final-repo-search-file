@@ -1,40 +1,56 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { search } from "@/utils/utils";
-import React, { useState, ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 import styles from '@/styles/styles.module.css';
 import Results from "@/components/repoans";
+import { useRecoilState } from "recoil";
+import { searchValueState, repositoriesState, pageState, hasMoreRepoState } from "@/utils/atom";
+
+// リポジトリの型を定義します
+type Repository = {
+  full_name: string;
+  html_url: string;
+  id: number;
+};
 
 const RepositoriesSearch: React.FC = () => {
-  const [repositories, setRepositories] = useState<any[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [page, setPage] = useState<number>(1); // ページ番号を管理する状態
-  const [hasMoreRepo, setHasMoreRepo] = useState<boolean>(true); // 次のページに結果があるかどうかを管理する状態
+  const [searchValue, setSearchValue] = useRecoilState(searchValueState);
+  const [repositories, setRepositories] = useRecoilState<Repository[] | null>(repositoriesState);
+  const [page, setPage] = useRecoilState(pageState);
+  const [hasMoreRepo, setHasMoreRepo] = useRecoilState(hasMoreRepoState);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
+  useEffect(() => {
+    if (searchValue) {
+      performSearch(searchValue, page);
+    }
+  }, [searchValue, page]);
 
   const performSearch = async (val: string, page: number = 1) => {
     setLoading(true);
-    const items = await search(
+    const items: Repository[] = await search(
       `https://api.github.com/search/repositories?q=${val}&per_page=20&page=${page}`
     );
     setRepositories(items);
     setLoading(false);
-    setHasMoreRepo(items && items.length === 20 ); 
+    setHasMoreRepo(items && items.length === 20);
   };
 
   const onChangeHandler = async (e: ChangeEvent<HTMLInputElement>) => {
-    setPage(1); 
-    performSearch(e.target.value, 1);
+    setPage(1);
     setSearchValue(e.target.value);
   };
 
   const onPageChange = async (newPage: number) => {
     setPage(newPage);
-    performSearch(searchValue, newPage);
   };
 
   const renderRepositories = () => {
-    if (!repositories) {
+    if (!searchValue ) {
+      return <h1>検索してください</h1>;
+    }
+    else if (!repositories || repositories.length === 0) {
       return <h1>検索結果はありません</h1>;
     }
     return (
@@ -48,7 +64,10 @@ const RepositoriesSearch: React.FC = () => {
             前のページ
           </button>
           <span>ページ {page}</span>
-          <button onClick={() => onPageChange(page + 1)} disabled={!hasMoreRepo || page === 5}>
+          <button 
+            onClick={() => onPageChange(page + 1)}
+            disabled={!hasMoreRepo || page === 5}
+          >
             次のページ
           </button>
         </div>
@@ -62,7 +81,7 @@ const RepositoriesSearch: React.FC = () => {
       <main className={styles.main}>
         <input
           value={searchValue}
-          onChange={e => onChangeHandler(e)}
+          onChange={onChangeHandler}
           placeholder="調べ物はなんですか"
           className={styles.input}
         />
@@ -74,3 +93,4 @@ const RepositoriesSearch: React.FC = () => {
 }
 
 export default RepositoriesSearch;
+

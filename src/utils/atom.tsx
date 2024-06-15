@@ -19,3 +19,25 @@ export const userDataState = atom<any | null>({
     key: 'userState',
     default: null,
 });
+
+
+//以下は検索結果を保持するアトム
+export const searchValueState = atom<string>({
+    key: 'searchValueState',
+    default: '',
+});
+
+export const repositoriesState = atom<any[] | null>({
+    key: 'repositoriesState',
+    default: null,
+});
+
+export const pageState = atom<number>({
+    key: 'pageState',
+    default: 1,
+});
+
+export const hasMoreRepoState = atom<boolean>({
+    key: 'hasMoreRepoState',
+    default: true,
+});
